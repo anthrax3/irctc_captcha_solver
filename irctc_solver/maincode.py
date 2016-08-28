@@ -1,12 +1,14 @@
 from PIL import Image
 from operator import itemgetter
+import hashlib
+import time
 
 im = Image.open("0.png")
 bg = Image.new("RGB",im.size,(255,255,255))
 bg.paste(im,im)
 bg.save("lol.jpg")
 im = Image.open("lol.jpg")
-im = im.convert("P") #256 pallette may convert
+im = im.convert("P") #256 pallette convert
 
 #
 his = im.histogram()
@@ -34,8 +36,7 @@ for x in range(im.size[1]):
 #
 
 
-print "Width is %d"%im.size[0]
-print "Height is %d"%im.size[1]
+
 
 inletter = False
 foundletter=False
@@ -43,9 +44,11 @@ start = 0
 end = 0
 
 letters = []
+print "Width is %d"%im.size[0]
+print "Height is %d"%im.size[1]
 
-for y in range(im2.size[0]): # slice across
-  for x in range(im2.size[1]): # slice down
+for y in range(im2.size[0]):
+  for x in range(im2.size[1]):
     pix = im2.getpixel((y,x))
     if pix != 255:
       inletter = True
@@ -62,3 +65,12 @@ for y in range(im2.size[0]): # slice across
 
   inletter=False
 print letters
+
+
+count = 0
+for letter in letters:
+  m = hashlib.md5()
+  im3 = im2.crop(( letter[0] , 0, letter[1],im2.size[1] ))
+  m.update("%s%s"%(time.time(),count))
+  im3.save("./%s.gif"%(m.hexdigest()))
+  count += 1
