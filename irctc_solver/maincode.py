@@ -30,7 +30,7 @@ for x in range(im.size[1]):
   for y in range(im.size[0]):
     pix = im.getpixel((y,x))
     temp[pix] = pix
-    if pix < 220:
+    if pix == 0 or pix == 96:
       im2.putpixel((y,x),0)
 
 #
