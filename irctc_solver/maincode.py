@@ -30,7 +30,7 @@ for x in range(im.size[1]):
   for y in range(im.size[0]):
     pix = im.getpixel((y,x))
     temp[pix] = pix
-    if pix == 0: # these are the numbers to get
+    if pix < 220:
       im2.putpixel((y,x),0)
 
 #
@@ -72,5 +72,5 @@ for letter in letters:
   m = hashlib.md5()
   im3 = im2.crop(( letter[0] , 0, letter[1],im2.size[1] ))
   m.update("%s%s"%(time.time(),count))
-  im3.save("./%s.gif"%(m.hexdigest()))
+  im3.save("./CUTS/%s.gif"%(m.hexdigest()))
   count += 1
