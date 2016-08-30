@@ -35,9 +35,6 @@ for x in range(im.size[1]):
 
 #
 
-
-
-
 inletter = False
 foundletter=False
 start = 0
@@ -61,7 +58,6 @@ for y in range(im2.size[0]):
     foundletter = False
     end = y
     letters.append((start,end))
-
 
   inletter=False
 print letters
