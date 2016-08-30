@@ -8,7 +8,6 @@ import math,os
 
 def main():
     args = sys.argv[1:]
-
     if not args:
         print "Dude atleast give me the image";
         sys.exit(1)
@@ -65,16 +64,14 @@ def create_image_to_parse(im):
 def segment_coordinates(im2):
     v = VectorCompare()
 
-
     iconset = ['0','1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-
 
     imageset = []
 
     for letter in iconset:
       for img in os.listdir('./iconset/%s/'%(letter)):
         temp = []
-        if img != "Thumbs.db": # windows check...
+        if img != "Thumbs.db":
           temp.append(buildvector(Image.open("./iconset/%s/%s"%(letter,img))))
         imageset.append({letter:temp})
 
@@ -121,7 +118,7 @@ def segment_coordinates(im2):
               if len(y) != 0:
                   guess.append((v.relation(y[0],buildvector(im3)),x))
       guess.sort(reverse=True)
-      print "",guess[0]
+      #print "",guess[0]
       guessword = "%s%s"%(guessword,guess[0][1])
       count+=1
 
@@ -144,8 +141,6 @@ class VectorCompare:
         topvalue += count * concordance2[word]
     return topvalue / (self.magnitude(concordance1) * self.magnitude(concordance2))
 """-----------------------------------------------------------------------------------------------------------"""
-
-
 
 if __name__ == '__main__':
   main()
