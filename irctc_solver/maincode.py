@@ -118,7 +118,7 @@ def segment_coordinates(im2):
               if len(y) != 0:
                   guess.append((v.relation(y[0],buildvector(im3)),x))
       guess.sort(reverse=True)
-      #print "",guess[0]
+      print "",guess[0]
       guessword = "%s%s"%(guessword,guess[0][1])
       count+=1
 

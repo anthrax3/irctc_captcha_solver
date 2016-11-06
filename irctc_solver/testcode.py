@@ -15,10 +15,12 @@ def main():
 
     for filename in args:
         im = Image.open(filename)
-        bg = Image.new("RGB",im.size,(255,255,255))
-        bg.paste(im,im)
-        bg.save("lol.jpg")
-        im = Image.open("lol.jpg")
+        if filename.endswith('.png'):
+            print "It is a PNG File"
+            bg = Image.new("RGB",im.size,(255,255,255))
+            bg.paste(im,im)
+            bg.save("lol.jpg")
+            im = Image.open("lol.jpg")
         im = im.convert("P") #256 pallette convert
         show_histogram(im)
         im2 = create_image_to_parse(im)
@@ -121,7 +123,7 @@ def segment_coordinates(im2):
               if len(y) != 0:
                   guess.append((v.relation(y[0],buildvector(im3)),x))
       guess.sort(reverse=True)
-      print "",guess[0]
+      #print "",guess[0]
       guessword = "%s%s"%(guessword,guess[0][1])
       count+=1
 
